@@ -28,6 +28,7 @@ const WorkplaceSelector = () => {
   const { t } = useTranslation()
   const { notify } = useContext(ToastContext)
   const { workspaces } = useWorkspacesContext()
+  console.log('22222', workspaces)
   const currentWorkspace = workspaces.find(v => v.current)
 
   const handleSwitchWorkspace = async (tenant_id: string) => {

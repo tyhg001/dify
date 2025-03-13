@@ -15,7 +15,7 @@ from controllers.console.datasets.error import (
     TooManyFilesError,
     UnsupportedFileTypeError,
 )
-from controllers.console.error import AccountNotLinkTenantError
+from controllers.console.error import AccountNotLinkTenantError,HTTPNoPermissionError,ResourceNotFoundError
 from controllers.console.wraps import (
     account_initialization_required,
     cloud_edition_billing_resource_check,
@@ -217,6 +217,24 @@ class WebappLogoWorkspaceApi(Resource):
 
         return {"id": upload_file.id}, 201
 
+# yjc-重命名工作空间
+class TenantRenameApi(Resource):
+    @setup_required
+    @login_required
+    @account_initialization_required
+    def put(self, tenant_id):
+        parser = reqparse.RequestParser()
+        parser.add_argument('name', type=str, required=True, location='json')
+        args = parser.parse_args()
+
+        TenantService.rename_tenant(current_user, tenant_id, args['name'])
+        # try:
+        #     TenantService.rename_tenant(current_user, tenant_id, args['name'])
+        # except Exception:
+        #     logging.exception("internal server error.")
+        #     raise ResourceNotFoundError()
+
+        return {'result': 'success'}, 200
 
 api.add_resource(TenantListApi, "/workspaces")  # GET for getting all tenants
 api.add_resource(WorkspaceListApi, "/all-workspaces")  # GET for getting all tenants
@@ -225,3 +243,4 @@ api.add_resource(TenantApi, "/info", endpoint="info")  # Deprecated
 api.add_resource(SwitchWorkspaceApi, "/workspaces/switch")  # POST for switching tenant
 api.add_resource(CustomConfigWorkspaceApi, "/workspaces/custom-config")
 api.add_resource(WebappLogoWorkspaceApi, "/workspaces/custom-config/webapp-logo/upload")
+api.add_resource(TenantRenameApi, '/workspaces/<tenant_id>/name')

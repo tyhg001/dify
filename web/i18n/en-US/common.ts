@@ -238,6 +238,11 @@ const translation = {
     disInvite: 'Cancel the invitation',
     deleteMember: 'Delete Member',
     you: '(You)',
+    rename: 'Rename',
+    workspaceName: 'Workspace Name',
+    renameWorkspace: 'Rename Workspace',
+    renamePlaceholder: 'Input A New Workspace Name',
+    workspaceNameInvalid: 'Invalid Workspace Name',
   },
   integrations: {
     connected: 'Connected',

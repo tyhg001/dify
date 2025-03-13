@@ -101,3 +101,14 @@ class AccountInFreezeError(BaseHTTPException):
         "This email account has been deleted within the past 30 days"
         "and is temporarily unavailable for new account registration."
     )
+
+class ResourceNotFoundError(BaseHTTPException):
+    error_code = 'resource_not_found'
+    code = 404
+    description = "没有找到资源!"
+
+class HTTPNoPermissionError(BaseHTTPException):
+    error_code = 'no_permission'
+    code = 403
+    description = "没有权限!"
+

@@ -1,26 +1,30 @@
 'use client'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { useContext } from 'use-context-selector'
-import { RiUserAddLine } from '@remixicon/react'
+import { RiSwapLine, RiUserAddLine } from '@remixicon/react'
 import { useTranslation } from 'react-i18next'
 import InviteModal from './invite-modal'
 import InvitedModal from './invited-modal'
 import Operation from './operation'
+import RenameWorkspaceModal from './rename-modal'
 import { fetchMembers } from '@/service/common'
 import I18n from '@/context/i18n'
 import { useAppContext } from '@/context/app-context'
 import Avatar from '@/app/components/base/avatar'
-import type { InvitationResult } from '@/models/common'
+import type { IWorkspace, InvitationResult } from '@/models/common'
 import LogoEmbeddedChatHeader from '@/app/components/base/logo/logo-embedded-chat-header'
 import { useProviderContext } from '@/context/provider-context'
 import { Plan } from '@/app/components/billing/type'
 import UpgradeBtn from '@/app/components/billing/upgrade-btn'
 import { NUM_INFINITE } from '@/app/components/billing/config'
 import { LanguagesSupported } from '@/i18n/language'
+
+import { useWorkspacesContext } from '@/context/workspace-context'
+
 dayjs.extend(relativeTime)
 
 const MembersPage = () => {
@@ -33,6 +37,8 @@ const MembersPage = () => {
     normal: t('common.members.normal'),
   }
   const { locale } = useContext(I18n)
+  const { workspaces } = useWorkspacesContext()
+  console.log(workspaces)
 
   const { userProfile, currentWorkspace, isCurrentWorkspaceOwner, isCurrentWorkspaceManager, systemFeatures } = useAppContext()
   const { data, mutate } = useSWR({ url: '/workspaces/current/members' }, fetchMembers)
@@ -44,13 +50,18 @@ const MembersPage = () => {
   const isNotUnlimitedMemberPlan = enableBilling && plan.type !== Plan.team && plan.type !== Plan.enterprise
   const isMemberFull = enableBilling && isNotUnlimitedMemberPlan && accounts.length >= plan.total.teamMembers
 
+  const [renameWorkspaceModalVisible, setRenameWorkspaceModalVisible] = useState(false)
+  // const { workspaces, reloadWorkspaces } = useWorkspacesContext()
+  const owner = useMemo(() => data?.accounts?.filter(account => account.role === 'owner')?.[0]?.email === userProfile.email, [data?.accounts, userProfile.email])
+  const currentWrokspace = currentWorkspace
+
   return (
     <>
       <div className='flex flex-col'>
         <div className='flex items-center mb-4 p-3 bg-gray-50 rounded-2xl'>
           <LogoEmbeddedChatHeader className='!w-10 !h-10' />
           <div className='grow mx-2'>
-            <div className='text-sm font-medium text-gray-900'>{currentWorkspace?.name}</div>
+            <div className='text-sm font-medium text-gray-900'>{currentWrokspace.name}</div>
             {enableBilling && (
               <div className='text-xs text-gray-500'>
                 {isNotUnlimitedMemberPlan
@@ -75,6 +86,14 @@ const MembersPage = () => {
           {isMemberFull && (
             <UpgradeBtn className='mr-2' loc='member-invite' />
           )}
+          <div className='
+              shrink-0 flex items-center py-[7px] px-3 border-[0.5px] border-gray-200
+              text-[13px] font-medium text-primary-600 bg-white
+              shadow-xs rounded-lg cursor-pointer
+                ' onClick={() => setRenameWorkspaceModalVisible(true)}>
+            <RiSwapLine className='w-4 h-4 mr-2 ' />
+            {t('common.members.rename')}
+          </div>
           <div className={
             `shrink-0 flex items-center py-[7px] px-3 border-[0.5px] border-gray-200
             text-[13px] font-medium text-primary-600 bg-white
@@ -139,6 +158,14 @@ const MembersPage = () => {
             onCancel={() => setInvitedModalVisible(false)}
           />
         )
+      }
+      {
+        renameWorkspaceModalVisible
+        && <RenameWorkspaceModal
+          onCancel={() => setRenameWorkspaceModalVisible(false)}
+          workspace={currentWrokspace}
+          // onRenamed={currentWrokspace.setName("1111")}
+        />
       }
     </>
   )

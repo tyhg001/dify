@@ -45,7 +45,7 @@ class LoginApi(Resource):
         parser.add_argument("password", type=valid_password, required=True, location="json")
         parser.add_argument("remember_me", type=bool, required=False, default=False, location="json")
         parser.add_argument("invite_token", type=str, required=False, default=None, location="json")
-        parser.add_argument("language", type=str, required=False, default="en-US", location="json")
+        parser.add_argument("language", type=str, required=False, default="zh-Hans", location="json")
         args = parser.parse_args()
 
         if dify_config.BILLING_ENABLED and BillingService.is_email_in_freeze(args["email"]):

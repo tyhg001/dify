@@ -348,3 +348,7 @@ export const verifyDeleteAccountCode = (body: { code: string;token: string }) =>
 
 export const submitDeleteAccountFeedback = (body: { feedback: string;email: string }) =>
   post<CommonResponse>('/account/delete/feedback', { body })
+
+export const renameWorkspace: Fetcher<CommonResponse & { new_name: string }, { url: string; body: Record<string, any> }> = ({ url, body }) => {
+  return put(url, { body }) as Promise<CommonResponse & { new_name: string }>
+}

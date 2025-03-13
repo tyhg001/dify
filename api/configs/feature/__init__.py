@@ -751,7 +751,7 @@ class PositionConfig(BaseSettings):
 class LoginConfig(BaseSettings):
     ENABLE_EMAIL_CODE_LOGIN: bool = Field(
         description="whether to enable email code login",
-        default=False,
+        default=True,
     )
     ENABLE_EMAIL_PASSWORD_LOGIN: bool = Field(
         description="whether to enable email password login",
@@ -771,7 +771,7 @@ class LoginConfig(BaseSettings):
     )
     ALLOW_CREATE_WORKSPACE: bool = Field(
         description="whether to enable create workspace",
-        default=False,
+        default=True,
     )
 
 

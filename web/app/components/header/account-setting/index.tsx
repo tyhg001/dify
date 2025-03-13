@@ -98,7 +98,7 @@ export default function AccountSetting({
         activeIcon: <RiPuzzle2Fill className={iconClassName} />,
       },
       {
-        key: (enableReplaceWebAppLogo || enableBilling) ? 'custom' : false,
+        key: 'custom',
         name: t('custom.custom'),
         icon: <RiColorFilterLine className={iconClassName} />,
         activeIcon: <RiColorFilterFill className={iconClassName} />,
