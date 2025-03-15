@@ -123,83 +123,9 @@ const Panel = (props: PanelProps) => {
       return
     handleValueChange()
   })
-
+// 去除可以改标签的弹窗
   return (
-    <div className='relative w-full bg-white rounded-lg border-[0.5px] border-gray-200'>
-      <div className='p-2 border-b-[0.5px] border-black/5'>
-        <Input
-          showLeftIcon
-          showClearIcon
-          value={keywords}
-          placeholder={t('common.tag.selectorPlaceholder') || ''}
-          onChange={e => handleKeywordsChange(e.target.value)}
-          onClear={() => handleKeywordsChange('')}
-        />
-      </div>
-      {keywords && notExisted && (
-        <div className='p-1'>
-          <div className='flex items-center gap-2 pl-3 py-[6px] pr-2 rounded-lg cursor-pointer hover:bg-gray-100' onClick={createNewTag}>
-            <RiAddLine className='h-4 w-4 text-gray-500' />
-            <div className='grow text-sm text-gray-700 leading-5 truncate'>
-              {`${t('common.tag.create')} `}
-              <span className='font-medium'>{`"${keywords}"`}</span>
-            </div>
-          </div>
-        </div>
-      )}
-      {keywords && notExisted && filteredTagList.length > 0 && (
-        <Divider className='!h-[1px] !my-0' />
-      )}
-      {(filteredTagList.length > 0 || filteredSelectedTagList.length > 0) && (
-        <div className='p-1 max-h-[172px] overflow-y-auto'>
-          {filteredSelectedTagList.map(tag => (
-            <div
-              key={tag.id}
-              className='flex items-center gap-2 pl-3 py-[6px] pr-2 rounded-lg cursor-pointer hover:bg-gray-100'
-              onClick={() => selectTag(tag)}
-            >
-              <Checkbox
-                className='shrink-0'
-                checked={selectedTagIDs.includes(tag.id)}
-                onCheck={() => { }}
-              />
-              <div title={tag.name} className='grow text-sm text-gray-700 leading-5 truncate'>{tag.name}</div>
-            </div>
-          ))}
-          {filteredTagList.map(tag => (
-            <div
-              key={tag.id}
-              className='flex items-center gap-2 pl-3 py-[6px] pr-2 rounded-lg cursor-pointer hover:bg-gray-100'
-              onClick={() => selectTag(tag)}
-            >
-              <Checkbox
-                className='shrink-0'
-                checked={selectedTagIDs.includes(tag.id)}
-                onCheck={() => { }}
-              />
-              <div title={tag.name} className='grow text-sm text-gray-700 leading-5 truncate'>{tag.name}</div>
-            </div>
-          ))}
-        </div>
-      )}
-      {!keywords && !filteredTagList.length && !filteredSelectedTagList.length && (
-        <div className='p-1'>
-          <div className='p-3 flex flex-col items-center gap-1'>
-            <Tag03 className='h-6 w-6 text-gray-300' />
-            <div className='text-gray-500 text-xs leading-[14px]'>{t('common.tag.noTag')}</div>
-          </div>
-        </div>
-      )}
-      <Divider className='!h-[1px] !my-0' />
-      <div className='p-1'>
-        <div className='flex items-center gap-2 pl-3 py-[6px] pr-2 rounded-lg cursor-pointer hover:bg-gray-100' onClick={() => setShowTagManagementModal(true)}>
-          <Tag03 className='h-4 w-4 text-gray-500' />
-          <div className='grow text-sm text-gray-700 leading-5 truncate'>
-            {t('common.tag.manageTags')}
-          </div>
-        </div>
-      </div>
-    </div>
+   <></>
   )
 }
 

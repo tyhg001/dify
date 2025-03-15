@@ -38,6 +38,8 @@ const ItemOperation: FC<IItemOperationProps> = ({
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
   const [isHovering, { setTrue: setIsHovering, setFalse: setNotHovering }] = useBoolean(false)
+  //fixme 些处暂时先写死，后面再优化
+  isShowDelete=false
   useEffect(() => {
     if (!isItemHovering && !isHovering)
       setOpen(false)

@@ -93,19 +93,8 @@ const SideBar: FC<IExploreSideBarProps> = ({
   const pinnedAppsCount = installedApps.filter(({ is_pinned }) => is_pinned).length
   return (
     <div className='w-fit sm:w-[216px] shrink-0 pt-6 px-4 border-r border-divider-burn cursor-pointer'>
-      <div className={cn(isDiscoverySelected ? 'text-text-accent' : 'text-text-tertiary')}>
-        <Link
-          href='/explore/apps'
-          className={cn(isDiscoverySelected ? ' bg-components-main-nav-nav-button-bg-active' : 'font-medium hover:bg-state-base-hover',
-            'flex items-center pc:justify-start pc:w-full mobile:justify-center mobile:w-fit h-9 px-3 mobile:px-2 gap-2 rounded-lg')}
-          style={isDiscoverySelected ? { boxShadow: '0px 1px 2px rgba(16, 24, 40, 0.05)' } : {}}
-        >
-          {isDiscoverySelected ? <SelectedDiscoveryIcon /> : <DiscoveryIcon />}
-          {!isMobile && <div className='text-sm'>{t('explore.sidebar.discovery')}</div>}
-        </Link>
-      </div>
       {installedApps.length > 0 && (
-        <div className='mt-10'>
+        <div className='mt-1'>
           <p className='pl-2 mobile:px-0 text-xs text-text-tertiary break-all font-medium uppercase'>{t('explore.sidebar.workspace')}</p>
           <div className='mt-3 space-y-1 overflow-y-auto overflow-x-hidden'
             style={{
@@ -125,7 +114,7 @@ const SideBar: FC<IExploreSideBarProps> = ({
                   isSelected={lastSegment?.toLowerCase() === id}
                   isPinned={is_pinned}
                   togglePin={() => handleUpdatePinStatus(id, !is_pinned)}
-                  uninstallable={uninstallable}
+                  uninstallable={!uninstallable}
                   onDelete={(id) => {
                     setCurrId(id)
                     setShowConfirm(true)

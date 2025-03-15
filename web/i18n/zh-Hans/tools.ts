@@ -149,7 +149,7 @@ const translation = {
   toolRemoved: '工具已被移除',
   notAuthorized: '工具未授权',
   howToGet: '如何获取',
-  openInStudio: '在工作室中打开',
+  openInStudio: '在智能体中打开',
   toolNameUsageTip: '工具调用名称，用于 Agent 推理和提示词',
   copyToolName: '复制名称',
   noTools: '没有工具',

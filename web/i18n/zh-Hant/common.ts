@@ -132,7 +132,7 @@ const translation = {
   menus: {
     status: 'beta',
     explore: '探索',
-    apps: '工作室',
+    apps: '智能体',
     plugins: '外掛',
     pluginsTips: '整合第三方外掛或建立與 ChatGPT 相容的 AI 外掛。',
     datasets: '知識庫',
@@ -189,7 +189,7 @@ const translation = {
     deleteConfirmTip: '請將以下內容從您的註冊電子郵件發送至 ',
     account: '帳戶',
     myAccount: '我的帳戶',
-    studio: 'Dify 工作室',
+    studio: '智能体',
     deletePrivacyLinkTip: '有關我們如何處理您的數據的更多資訊，請參閱我們的',
     deletePrivacyLink: '隱私策略。',
     deleteSuccessTip: '您的帳戶需要時間才能完成刪除。完成後，我們會給您發送電子郵件。',

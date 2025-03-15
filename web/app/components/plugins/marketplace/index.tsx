@@ -36,6 +36,8 @@ const Marketplace = async ({
     marketplaceCollectionPluginsMap = marketplaceCollectionsAndPluginsData.marketplaceCollectionPluginsMap
   }
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     <TanstackQueryIniter>
       <MarketplaceContextProvider

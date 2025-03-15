@@ -138,7 +138,7 @@ const translation = {
   menus: {
     status: 'beta',
     explore: '探索',
-    apps: '工作室',
+    apps: '智能体',
     plugins: '插件',
     exploreMarketplace: '探索 Marketplace',
     pluginsTips: '集成第三方插件或创建与 ChatGPT 兼容的 AI 插件。',
@@ -188,7 +188,7 @@ const translation = {
   account: {
     account: '账户',
     myAccount: '我的账户',
-    studio: 'Dify 工作室',
+    studio: '智能体',
     avatar: '头像',
     name: '用户名',
     email: '邮箱',
