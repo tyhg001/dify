@@ -1,10 +1,12 @@
+- 提交代码git commit --no-verify -m "merge main"
+
 ## 用到的相关表
 - apps 记录所有的智能体
 - installed_apps 记录已经安装的智能体 和上面有什么区别还未知
 - conversations 记录会话
+    - 1.增加字段user_app_id用来记录会话指向的智能体
 - messages 记录会话中的内容
 - sites 记录站点信息?
-
 
 ## 工作空间（租户相关）
 - tenants 记录租户列表

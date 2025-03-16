@@ -69,7 +69,6 @@ export default function AppSelector() {
                     <div className='flex flex-nowrap items-center px-3 py-2'>
                       <div className='grow'>
                         <div className='system-md-medium text-text-primary break-all'>{userProfile.name}</div>
-                        <div className='system-xs-regular text-text-tertiary break-all'>{userProfile.email}</div>
                       </div>
                       <Avatar avatar={userProfile.avatar_url} name={userProfile.name} size={32} />
                     </div>

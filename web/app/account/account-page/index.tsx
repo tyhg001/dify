@@ -151,7 +151,7 @@ export default function AccountPage() {
         </div>
       </div>
       <div className='mb-8'>
-        <div className={titleClassName}>{t('common.account.email')}</div>
+        <div className={titleClassName}>登陆账号</div>
         <div className='flex items-center justify-between gap-2 w-full mt-2'>
           <div className='flex-1 bg-components-input-bg-normal rounded-lg p-2 system-sm-regular text-components-input-text-filled '>
             <span className='pl-1'>{userProfile.email}</span>
@@ -170,19 +170,6 @@ export default function AccountPage() {
         )
       }
       <div className='mb-6 border-[1px] border-divider-subtle' />
-      <div className='mb-8'>
-        <div className={titleClassName}>{t('common.account.langGeniusAccount')}</div>
-        <div className={descriptionClassName}>{t('common.account.langGeniusAccountTip')}</div>
-        {!!apps.length && (
-          <Collapse
-            title={`${t('common.account.showAppLength', { length: apps.length })}`}
-            items={apps.map(app => ({ key: app.id, name: app.name }))}
-            renderItem={renderAppItem}
-            wrapperClassName='mt-2'
-          />
-        )}
-        {!IS_CE_EDITION && <Button className='mt-2 text-components-button-destructive-secondary-text' onClick={() => setShowDeleteAccountModal(true)}>{t('common.account.delete')}</Button>}
-      </div>
       {
         editNameModalVisible && (
           <Modal

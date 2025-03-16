@@ -1,8 +1,8 @@
 const translation = {
-  pageTitle: '嗨，近来可好',
-  welcome: '👋 欢迎来到 Dify, 登录以继续',
-  email: '邮箱',
-  emailPlaceholder: '输入邮箱地址',
+  pageTitle: 'AI平台',
+  welcome: '登录以继续',
+  email: '用户名',
+  emailPlaceholder: '输入用户名',
   password: '密码',
   passwordPlaceholder: '输入密码',
   name: '用户名',

@@ -93,7 +93,6 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                     <div className='flex flex-nowrap items-center pl-3 pr-2 py-[13px]'>
                       <div className='grow'>
                         <div className='system-md-medium text-text-primary break-all'>{userProfile.name}</div>
-                        <div className='system-xs-regular text-text-tertiary break-all'>{userProfile.email}</div>
                       </div>
                       <Avatar avatar={userProfile.avatar_url} name={userProfile.name} size={36} className='mr-3' />
                     </div>
@@ -111,77 +110,6 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                         <RiArrowRightUpLine className='size-[14px] shrink-0 text-text-tertiary' />
                       </Link>}
                     </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => <div className={classNames(itemClassName,
-                        active && 'bg-state-base-hover',
-                      )} onClick={() => setShowAccountSettingModal({ payload: 'members' })}>
-                        <RiSettings3Line className='size-4 shrink-0 text-text-tertiary' />
-                        <div className='grow system-md-regular text-text-secondary px-1'>{t('common.userProfile.settings')}</div>
-                      </div>}
-                    </Menu.Item>
-                  </div>
-                  <div className='p-1'>
-                    <Menu.Item>
-                      {({ active }) => <Link
-                        className={classNames(itemClassName, 'group justify-between',
-                          active && 'bg-state-base-hover',
-                        )}
-                        href={
-                          locale !== LanguagesSupported[1] ? 'https://docs.dify.ai/' : `https://docs.dify.ai/v/${locale.toLowerCase()}/`
-                        }
-                        target='_blank' rel='noopener noreferrer'>
-                        <RiBookOpenLine className='shrink-0 size-4 text-text-tertiary' />
-                        <div className='grow system-md-regular text-text-secondary px-1'>{t('common.userProfile.helpCenter')}</div>
-                        <RiArrowRightUpLine className='shrink-0 size-[14px] text-text-tertiary' />
-                      </Link>}
-                    </Menu.Item>
-                    <Support />
-                    {IS_CLOUD_EDITION && isCurrentWorkspaceOwner && <Compliance />}
-                  </div>
-                  <div className='p-1'>
-                    <Menu.Item>
-                      {({ active }) => <Link
-                        className={classNames(itemClassName, 'group justify-between',
-                          active && 'bg-state-base-hover',
-                        )}
-                        href='https://roadmap.dify.ai'
-                        target='_blank' rel='noopener noreferrer'>
-                        <RiMap2Line className='shrink-0 size-4 text-text-tertiary' />
-                        <div className='grow system-md-regular text-text-secondary px-1'>{t('common.userProfile.roadmap')}</div>
-                        <RiArrowRightUpLine className='shrink-0 size-[14px] text-text-tertiary' />
-                      </Link>}
-                    </Menu.Item>
-                    {systemFeatures.license.status === LicenseStatus.NONE && <Menu.Item>
-                      {({ active }) => <Link
-                        className={classNames(itemClassName, 'group justify-between',
-                          active && 'bg-state-base-hover',
-                        )}
-                        href='https://github.com/langgenius/dify'
-                        target='_blank' rel='noopener noreferrer'>
-                        <RiGithubLine className='shrink-0 size-4 text-text-tertiary' />
-                        <div className='grow system-md-regular text-text-secondary px-1'>{t('common.userProfile.github')}</div>
-                        <div className='flex items-center gap-0.5 px-[5px] py-[3px] border border-divider-deep rounded-[5px] bg-components-badge-bg-dimm'>
-                          <RiStarLine className='shrink-0 size-3 text-text-tertiary' />
-                          <GithubStar className='system-2xs-medium-uppercase text-text-tertiary' />
-                        </div>
-                      </Link>}
-                    </Menu.Item>}
-                    {
-                      document?.body?.getAttribute('data-public-site-about') !== 'hide' && (
-                        <Menu.Item>
-                          {({ active }) => <div className={classNames(itemClassName, 'justify-between',
-                            active && 'bg-state-base-hover',
-                          )} onClick={() => setAboutVisible(true)}>
-                            <RiInformation2Line className='shrink-0 size-4 text-text-tertiary' />
-                            <div className='grow system-md-regular text-text-secondary px-1'>{t('common.userProfile.about')}</div>
-                            <div className='shrink-0 flex items-center'>
-                              <div className='mr-2 system-xs-regular text-text-tertiary'>{langeniusVersionInfo.current_version}</div>
-                              <Indicator color={langeniusVersionInfo.current_version === langeniusVersionInfo.latest_version ? 'green' : 'orange'} />
-                            </div>
-                          </div>}
-                        </Menu.Item>
-                      )
-                    }
                   </div>
                   <Menu.Item>
                     {({ active }) => <div className='p-1' onClick={() => handleLogout()}>
