@@ -19,8 +19,9 @@ const ExploreNav = ({
   const selectedSegment = useSelectedLayoutSegment()
   const activated = selectedSegment === 'explore'
 //fixme 些处的id是写死的，后面需要修改
+  const installId=localStorage.getItem('install_id') ?? '655b9a35-887e-4dd4-b385-d7763ef25a05';
   return (
-    <Link href="/explore/installed/655b9a35-887e-4dd4-b385-d7763ef25a05" className={classNames(
+    <Link href={`/explore/installed/${installId}`} className={classNames(
       className, 'group',
       activated && 'bg-components-main-nav-nav-button-bg-active shadow-md',
       activated ? 'text-components-main-nav-nav-button-text-active' : 'text-components-main-nav-nav-button-text hover:bg-components-main-nav-nav-button-bg-hover',

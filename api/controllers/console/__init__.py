@@ -90,6 +90,7 @@ from .explore import (
     parameter,
     recommended_app,
     saved_message,
+    user_app
 )
 
 # Explore Audio

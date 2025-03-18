@@ -1,8 +1,14 @@
-export const getRedirection = (
+import {fetchFilePreview, getInstallId, getPayUrl} from "@/service/common";
+export const getRedirection = async (
   isCurrentWorkspaceEditor: boolean,
   app: any,
   redirectionFunc: (href: string) => void,
 ) => {
-    //fixme 此处要调整两个对应的id不一至
-    redirectionFunc(`/explore/installed/${app.id}`)
+    //直接跳转对应的智能体问答
+    try {
+        const res = await getInstallId({ app_id:app.id })
+        localStorage.setItem('install_id', res.installId)
+        redirectionFunc(`/explore/installed/${res.installId}`)
+    }
+    catch { }
 }

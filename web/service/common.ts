@@ -347,3 +347,10 @@ export const submitDeleteAccountFeedback = (body: { feedback: string; email: str
 
 export const getDocDownloadUrl = (doc_name: string) =>
   get<{ url: string }>('/compliance/download', { params: { doc_name } }, { silent: true })
+
+
+
+export const getInstallId: Fetcher<{ installId: string }, { app_id: string }> = ({ app_id }) => {
+    return get<{ installId: string }>(`/user-apps/install-id/${app_id}`)
+}
+

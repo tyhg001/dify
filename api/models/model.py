@@ -565,7 +565,7 @@ class RecommendedApp(Base):
     position = db.Column(db.Integer, nullable=False, default=0)
     is_listed = db.Column(db.Boolean, nullable=False, default=True)
     install_count = db.Column(db.Integer, nullable=False, default=0)
-    language = db.Column(db.String(255), nullable=False, server_default=db.text("'en-US'::character varying"))
+    language = db.Column(db.String(255), nullable=False, server_default=db.text("'zh-Hans'::character varying"))
     created_at = db.Column(db.DateTime, nullable=False, server_default=func.current_timestamp())
     updated_at = db.Column(db.DateTime, nullable=False, server_default=func.current_timestamp())
 
@@ -632,7 +632,6 @@ class Conversation(db.Model):  # type: ignore[name-defined]
     read_at = db.Column(db.DateTime)
     read_account_id = db.Column(StringUUID)
     dialogue_count: Mapped[int] = mapped_column(default=0)
-    user_app_id = db.Column(StringUUID) #新增，用来记录普通用户的对话id
     created_at = db.Column(db.DateTime, nullable=False, server_default=func.current_timestamp())
     updated_at = db.Column(db.DateTime, nullable=False, server_default=func.current_timestamp())
 
@@ -1802,33 +1801,18 @@ class TraceAppConfig(Base):
             "updated_at": str(self.updated_at) if self.updated_at else None,
         }
 
-# 用户使用的app列表,参照InstalledApp
-class UserApp(Base):
+# 用户使用的app列表,关联InstalledApp
+class ExtUserApps(Base):
     __tablename__ = "ext_user_apps"
     __table_args__ = (
-        db.PrimaryKeyConstraint("id", name="installed_app_pkey"),
-        db.Index("user_app_tenant_id_idx", "tenant_id"),
-        db.Index("installed_app_app_id_idx", "app_id"),
-        db.Index("user_app_user_id_idx", "user_id"),
+        db.PrimaryKeyConstraint("id", name="user_app_key"),
+        db.Index("installed_app_id_idx", "installed_app_id"),
+        db.Index("user_id_idx", "user_id"),
     )
 
     id = db.Column(StringUUID, server_default=db.text("uuid_generate_v4()"))
-    tenant_id = db.Column(StringUUID, nullable=False)
-    app_id = db.Column(StringUUID, nullable=False)
-    app_owner_tenant_id = db.Column(StringUUID, nullable=False)
-    position = db.Column(db.Integer, nullable=False, default=0)
+    installed_app_id = db.Column(StringUUID, nullable=False)
+    user_id = db.Column(StringUUID, nullable=False)
     is_pinned = db.Column(db.Boolean, nullable=False, server_default=db.text("false"))
-    last_used_at = db.Column(db.DateTime, nullable=True)
     is_deleted = db.Column(db.Boolean, nullable=False, server_default=db.text("false"))
-    created_by = db.Column(StringUUID, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, server_default=func.current_timestamp())
-
-    @property
-    def app(self):
-        app = db.session.query(App).filter(App.id == self.app_id).first()
-        return app
-
-    @property
-    def tenant(self):
-        tenant = db.session.query(Tenant).filter(Tenant.id == self.tenant_id).first()
-        return tenant

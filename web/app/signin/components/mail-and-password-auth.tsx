@@ -6,7 +6,7 @@ import { useContext } from 'use-context-selector'
 import Button from '@/app/components/base/button'
 import Toast from '@/app/components/base/toast'
 import { emailRegex } from '@/config'
-import { login } from '@/service/common'
+import {getInstallId, login} from '@/service/common'
 import Input from '@/app/components/base/input'
 import I18NContext from '@/context/i18n'
 
@@ -73,6 +73,8 @@ export default function MailAndPasswordAuth({ isInvite, isEmailSetup, allowRegis
         else {
           localStorage.setItem('console_token', res.data.access_token)
           localStorage.setItem('refresh_token', res.data.refresh_token)
+          const result = await getInstallId({ app_id:"" })
+          localStorage.setItem('install_id', result.installId);
           router.replace('/apps')
         }
       }

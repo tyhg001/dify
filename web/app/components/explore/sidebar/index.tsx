@@ -8,7 +8,7 @@ import Link from 'next/link'
 import Toast from '../../base/toast'
 import Item from './app-nav-item'
 import cn from '@/utils/classnames'
-import { fetchInstalledAppList as doFetchInstalledAppList, uninstallApp, updatePinStatus } from '@/service/explore'
+import { fetchUserAppList, uninstallApp, updatePinStatus } from '@/service/explore'
 import ExploreContext from '@/context/explore-context'
 import Confirm from '@/app/components/base/confirm'
 import Divider from '@/app/components/base/divider'
@@ -56,7 +56,7 @@ const SideBar: FC<IExploreSideBarProps> = ({
   const isMobile = media === MediaType.mobile
 
   const fetchInstalledAppList = async () => {
-    const { installed_apps }: any = await doFetchInstalledAppList()
+    const { installed_apps }: any = await fetchUserAppList()
     setInstalledApps(installed_apps)
   }
 
