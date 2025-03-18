@@ -1,14 +1,17 @@
-import {fetchFilePreview, getInstallId, getPayUrl} from "@/service/common";
-export const getRedirection = async (
+import type { AppMode } from '@/types/app'
+
+export const getRedirection = (
   isCurrentWorkspaceEditor: boolean,
-  app: any,
+  app: { id: string, mode: AppMode },
   redirectionFunc: (href: string) => void,
 ) => {
-    //直接跳转对应的智能体问答
-    try {
-        const res = await getInstallId({ app_id:app.id })
-        localStorage.setItem('install_id', res.installId)
-        redirectionFunc(`/explore/installed/${res.installId}`)
-    }
-    catch { }
+  if (!isCurrentWorkspaceEditor) {
+    redirectionFunc(`/app/${app.id}/overview`)
+  }
+  else {
+    if (app.mode === 'workflow' || app.mode === 'advanced-chat')
+      redirectionFunc(`/app/${app.id}/workflow`)
+    else
+      redirectionFunc(`/app/${app.id}/configuration`)
+  }
 }
