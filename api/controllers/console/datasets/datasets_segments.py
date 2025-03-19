@@ -367,8 +367,11 @@ class DatasetDocumentSegmentBatchImportApi(Resource):
             raise ValueError("Invalid file type. Only CSV files are allowed")
 
         try:
-            # Skip the first row
-            df = pd.read_csv(file)
+            # 增加excel解析功能
+            if (file.filename.endswith(".csv")):
+                df = pd.read_csv(file)
+            else:
+                df = pd.read_excel(file)
             result = []
             for index, row in df.iterrows():
                 if document.doc_form == "qa_model":

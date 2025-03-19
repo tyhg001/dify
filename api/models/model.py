@@ -1806,8 +1806,7 @@ class ExtUserApps(Base):
     __tablename__ = "ext_user_apps"
     __table_args__ = (
         db.PrimaryKeyConstraint("id", name="user_app_key"),
-        db.Index("installed_app_id_idx", "installed_app_id"),
-        db.Index("user_id_idx", "user_id"),
+        db.Index("installed_app_id_idx", "installed_app_id")
     )
 
     id = db.Column(StringUUID, server_default=db.text("uuid_generate_v4()"))

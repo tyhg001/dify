@@ -679,6 +679,49 @@ class IndexingRunner:
         DocumentSegment.query.filter_by(document_id=dataset_document_id).update(update_params)
         db.session.commit()
 
+    @staticmethod
+    def batch_add_segments(segments: list[DocumentSegment], dataset: Dataset):
+        """
+        Batch add segments index processing
+        """
+        documents = []
+        documents_nokeywords = []
+        for segment in segments:
+            mdata={
+                    "doc_id": segment.index_node_id,
+                    "doc_hash": segment.index_node_hash,
+                    "document_id": segment.document_id,
+                    "dataset_id": segment.dataset_id,
+                }
+            document = Document(
+                page_content=segment.content,
+                metadata=mdata
+            )
+            # 增加关键词
+            if segment.keywords:
+                document.metadata['keywords'] = segment.keywords
+            # 增加标题的向量索引
+            if segment.title:
+                document1 = Document(
+                    page_content=segment.title,
+                    metadata=mdata
+                )
+                documents_nokeywords.append(document1)
+            # 增加常用问题的向量索引
+            if segment.question:
+                for question in segment.question:
+                    document2 = Document(
+                        page_content=question,
+                        metadata=mdata
+                    )
+                    documents_nokeywords.append(document2)
+            documents.append(document)
+        # save vector index
+        index_type = dataset.doc_form
+        index_processor = IndexProcessorFactory(index_type).init_index_processor()
+        index_processor.load(dataset, documents)
+        index_processor.load(dataset, documents_nokeywords,False)
+
     def _transform(
         self,
         index_processor: BaseIndexProcessor,

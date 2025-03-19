@@ -104,6 +104,17 @@ def batch_create_segment_to_index_task(
                 status="completed",
                 completed_at=datetime.datetime.now(datetime.UTC).replace(tzinfo=None),
             )
+
+            # yjc-新增几个向量解析参数
+            if segment.get("title") and segment.get("title").strip():
+                segment_document.title = segment["title"]
+            if segment.get("question") and segment.get("question").strip():
+                q_list = segment["question"].split(',')
+                segment_document.question = q_list
+            if segment.get("keywords") and segment.get("keywords").strip():
+                k_list = segment["keywords"].split(',')
+                segment_document.keywords = k_list
+
             if dataset_document.doc_form == "qa_model":
                 segment_document.answer = segment["answer"]
                 segment_document.word_count += len(segment["answer"])

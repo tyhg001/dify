@@ -17,3 +17,9 @@
 - []修正对话历史的标题，明天改
 - 去除设置相关信息，明天改
 - 去除登陆email的限制，明天改
+
+## 启动命名
+- flask db upgrade
+- flask run --host 0.0.0.0 --port=5001 --debug
+- celery -A app.celery worker -P solo --without-gossip --without-mingle -Q dataset,generation,mail,ops_trace --loglevel INFO
+- celery -A app.celery worker --without-gossip --without-mingle -Q dataset,generation,mail,ops_trace --loglevel INFO (多线程)

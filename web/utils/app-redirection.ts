@@ -1,17 +1,12 @@
 import type { AppMode } from '@/types/app'
+import {getInstallId} from "@/service/common";
 
-export const getRedirection = (
-  isCurrentWorkspaceEditor: boolean,
-  app: { id: string, mode: AppMode },
-  redirectionFunc: (href: string) => void,
+export const getRedirection = async (
+    isCurrentWorkspaceEditor: boolean,
+    app: { id: string, mode: AppMode },
+    redirectionFunc: (href: string) => void,
 ) => {
-  if (!isCurrentWorkspaceEditor) {
-    redirectionFunc(`/app/${app.id}/overview`)
-  }
-  else {
-    if (app.mode === 'workflow' || app.mode === 'advanced-chat')
-      redirectionFunc(`/app/${app.id}/workflow`)
-    else
-      redirectionFunc(`/app/${app.id}/configuration`)
-  }
+    const res = await getInstallId({app_id: app.id})
+    localStorage.setItem('install_id', res.installId)
+    redirectionFunc(`/explore/installed/${res.installId}`)
 }
