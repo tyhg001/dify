@@ -3,16 +3,12 @@ import { useMemo, useState } from 'react'
 import { useContext } from 'use-context-selector'
 import { useTranslation } from 'react-i18next'
 import { useUnmount } from 'ahooks'
-import { RiAddLine } from '@remixicon/react'
 import { useStore as useTagStore } from './store'
 import cn from '@/utils/classnames'
 import type { HtmlContentProps } from '@/app/components/base/popover'
 import CustomPopover from '@/app/components/base/popover'
-import Divider from '@/app/components/base/divider'
-import Input from '@/app/components/base/input'
 import { Tag01, Tag03 } from '@/app/components/base/icons/src/vender/line/financeAndECommerce'
 import type { Tag } from '@/app/components/base/tag-management/constant'
-import Checkbox from '@/app/components/base/checkbox'
 import { bindTag, createTag, fetchTagList, unBindTag } from '@/service/tag'
 import { ToastContext } from '@/app/components/base/toast'
 
@@ -158,9 +154,9 @@ const TagSelector: FC<TagSelectorProps> = ({
   const Trigger = () => {
     return (
       <div className={cn(
-        'group/tip relative w-full flex items-center gap-1 px-2 py-[7px] rounded-md cursor-pointer hover:bg-gray-100',
+        'group/tip relative w-full flex items-center gap-1 px-2 py-[7px] rounded-md cursor-pointer hover:bg-state-base-hover',
       )}>
-        <Tag01 className='shrink-0 w-3 h-3' />
+        <Tag01 className='w-3 h-3 shrink-0' />
         <div className='grow text-xs text-start leading-[18px] font-normal truncate'>
           {!triggerContent ? t('common.tag.addTag') : triggerContent}
         </div>
@@ -187,8 +183,8 @@ const TagSelector: FC<TagSelectorProps> = ({
           btnElement={<Trigger />}
           btnClassName={open =>
             cn(
-              open ? '!bg-gray-100 !text-gray-700' : '!bg-transparent',
-              '!w-full !p-0 !border-0 !text-gray-500 hover:!bg-gray-100 hover:!text-gray-700',
+              open ? '!bg-state-base-hover !text-text-secondary' : '!bg-transparent',
+              '!w-full !p-0 !border-0 !text-text-tertiary hover:!bg-state-base-hover hover:!text-text-secondary',
             )
           }
           popupClassName='!w-full !ring-0'
