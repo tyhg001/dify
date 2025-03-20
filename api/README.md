@@ -23,3 +23,6 @@
 - flask run --host 0.0.0.0 --port=5001 --debug
 - celery -A app.celery worker -P solo --without-gossip --without-mingle -Q dataset,generation,mail,ops_trace --loglevel INFO
 - celery -A app.celery worker --without-gossip --without-mingle -Q dataset,generation,mail,ops_trace --loglevel INFO (多线程)
+
+- poetry run celery -A app.celery worker -P gevent -c 1 -Q dataset,generation,mail,ops_trace --loglevel debug(linux)
+- poetry run celery -A app.celery worker -P threads -c 1 -Q dataset,generation,mail,ops_trace --loglevel INFO (linux多线程)
