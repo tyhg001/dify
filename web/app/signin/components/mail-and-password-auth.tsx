@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -6,7 +5,7 @@ import { useContext } from 'use-context-selector'
 import Button from '@/app/components/base/button'
 import Toast from '@/app/components/base/toast'
 import { emailRegex } from '@/config'
-import {getInstallId, login} from '@/service/common'
+import { login } from '@/service/common'
 import Input from '@/app/components/base/input'
 import I18NContext from '@/context/i18n'
 
@@ -73,8 +72,7 @@ export default function MailAndPasswordAuth({ isInvite, isEmailSetup, allowRegis
         else {
           localStorage.setItem('console_token', res.data.access_token)
           localStorage.setItem('refresh_token', res.data.refresh_token)
-          const result = await getInstallId({ app_id:"" })
-          localStorage.setItem('install_id', result.installId);
+          localStorage.setItem('install_id', 'fe38f6ed-6bbe-4b58-8919-24f4e56bd35e')
           router.replace('/apps')
         }
       }
