@@ -226,37 +226,37 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
     }
     return (
       <div className="relative w-full py-1" onMouseLeave={onMouseLeave}>
-        <button className='h-8 w-[calc(100%_-_8px)] py-[6px] px-3 mx-1 flex items-center gap-2 hover:bg-state-base-hover rounded-lg cursor-pointer' onClick={onClickSettings}>
-          <span className='text-text-secondary system-sm-regular'>{t('app.editApp')}</span>
+        <button className='mx-1 flex h-8 w-[calc(100%_-_8px)] cursor-pointer items-center gap-2 rounded-lg px-3 py-[6px] hover:bg-state-base-hover' onClick={onClickSettings}>
+          <span className='system-sm-regular text-text-secondary'>{t('app.editApp')}</span>
         </button>
         <Divider className="!my-1" />
-        <button className='h-8 w-[calc(100%_-_8px)] py-[6px] px-3 mx-1 flex items-center gap-2 hover:bg-state-base-hover rounded-lg cursor-pointer' onClick={onClickDuplicate}>
-          <span className='text-text-secondary system-sm-regular'>{t('app.duplicate')}</span>
+        <button className='mx-1 flex h-8 w-[calc(100%_-_8px)] cursor-pointer items-center gap-2 rounded-lg px-3 py-[6px] hover:bg-state-base-hover' onClick={onClickDuplicate}>
+          <span className='system-sm-regular text-text-secondary'>{t('app.duplicate')}</span>
         </button>
-        <button className='h-8 w-[calc(100%_-_8px)] py-[6px] px-3 mx-1 flex items-center gap-2 hover:bg-state-base-hover rounded-lg cursor-pointer' onClick={onClickExport}>
-          <span className='text-text-secondary system-sm-regular'>{t('app.export')}</span>
+        <button className='mx-1 flex h-8 w-[calc(100%_-_8px)] cursor-pointer items-center gap-2 rounded-lg px-3 py-[6px] hover:bg-state-base-hover' onClick={onClickExport}>
+          <span className='system-sm-regular text-text-secondary'>{t('app.export')}</span>
         </button>
         {(app.mode === 'completion' || app.mode === 'chat') && (
           <>
             <Divider className="!my-1" />
             <div
-              className='h-9 py-2 px-3 mx-1 flex items-center hover:bg-state-base-hover rounded-lg cursor-pointer'
+              className='flex items-center px-3 py-2 mx-1 rounded-lg cursor-pointer h-9 hover:bg-state-base-hover'
               onClick={onClickSwitch}
             >
-              <span className='text-text-secondary text-sm leading-5'>{t('app.switch')}</span>
+              <span className='text-sm leading-5 text-text-secondary'>{t('app.switch')}</span>
             </div>
           </>
         )}
         <Divider className="!my-1" />
-        <button className='h-8 w-[calc(100%_-_8px)] py-[6px] px-3 mx-1 flex items-center gap-2 hover:bg-state-base-hover rounded-lg cursor-pointer' onClick={onClickInstalledApp}>
-          <span className='text-text-secondary system-sm-regular'>{t('app.openInExplore')}</span>
+        <button className='mx-1 flex h-8 w-[calc(100%_-_8px)] cursor-pointer items-center gap-2 rounded-lg px-3 py-[6px] hover:bg-state-base-hover' onClick={onClickInstalledApp}>
+          <span className='system-sm-regular text-text-secondary'>{t('app.openInExplore')}</span>
         </button>
         <Divider className="!my-1" />
         <div
-          className='group h-8 w-[calc(100%_-_8px)] py-[6px] px-3 mx-1 flex items-center gap-2 hover:bg-state-destructive-hover rounded-lg cursor-pointer'
+          className='group mx-1 flex h-8 w-[calc(100%_-_8px)] cursor-pointer items-center gap-2 rounded-lg px-3 py-[6px] hover:bg-state-destructive-hover'
           onClick={onClickDelete}
         >
-          <span className='text-text-secondary system-sm-regular group-hover:text-text-destructive'>
+          <span className='system-sm-regular text-text-secondary group-hover:text-text-destructive'>
             {t('common.operation.delete')}
           </span>
         </div>
@@ -290,11 +290,11 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
             />
             <AppTypeIcon type={app.mode} wrapperClassName='absolute -bottom-0.5 -right-0.5 w-4 h-4 shadow-sm' className='w-3 h-3' />
           </div>
-          <div className='grow w-0 py-[1px]'>
-            <div className='flex items-center text-sm leading-5 font-semibold text-text-secondary'>
+          <div className='w-0 grow py-[1px]'>
+            <div className='flex items-center text-sm font-semibold leading-5 text-text-secondary'>
               <div className='truncate' title={app.name}>{app.name}</div>
             </div>
-            <div className='flex items-center text-[10px] leading-[18px] text-text-tertiary font-medium'>
+            <div className='flex items-center text-[10px] font-medium leading-[18px] text-text-tertiary'>
               {app.mode === 'advanced-chat' && <div className='truncate'>{t('app.types.advanced').toUpperCase()}</div>}
               {app.mode === 'chat' && <div className='truncate'>{t('app.types.chatbot').toUpperCase()}</div>}
               {app.mode === 'agent-chat' && <div className='truncate'>{t('app.types.agent').toUpperCase()}</div>}
@@ -313,7 +313,7 @@ const AppCard = ({ app, onRefresh }: AppCardProps) => {
         </div>
         {/*底部标签部分，去除点击事件*/}
         <div className={cn(
-          'absolute bottom-1 left-0 right-0 items-center shrink-0 pt-1 pl-[14px] pr-[6px] pb-[6px] h-[42px]',
+          'absolute bottom-1 left-0 right-0 h-[42px] shrink-0 items-center pb-[6px] pl-[14px] pr-[6px] pt-1',
           tags.length ? 'flex' : '!hidden group-hover:!flex',
         )}>
 

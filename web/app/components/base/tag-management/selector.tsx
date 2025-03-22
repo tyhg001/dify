@@ -154,7 +154,7 @@ const TagSelector: FC<TagSelectorProps> = ({
   const Trigger = () => {
     return (
       <div className={cn(
-        'group/tip relative w-full flex items-center gap-1 px-2 py-[7px] rounded-md cursor-pointer hover:bg-state-base-hover',
+        'group/tip relative flex w-full cursor-pointer items-center gap-1 rounded-md px-2 py-[7px] hover:bg-state-base-hover',
       )}>
         <Tag01 className='w-3 h-3 shrink-0' />
         <div className='grow text-xs text-start leading-[18px] font-normal truncate'>
@@ -184,11 +184,11 @@ const TagSelector: FC<TagSelectorProps> = ({
           btnClassName={open =>
             cn(
               open ? '!bg-state-base-hover !text-text-secondary' : '!bg-transparent',
-              '!w-full !p-0 !border-0 !text-text-tertiary hover:!bg-state-base-hover hover:!text-text-secondary',
+              '!w-full !border-0 !p-0 !text-text-tertiary hover:!bg-state-base-hover hover:!text-text-secondary',
             )
           }
           popupClassName='!w-full !ring-0'
-          className={'!w-full h-fit !z-20'}
+          className={'!z-20 h-fit !w-full'}
         />
       )}
     </>

@@ -13,7 +13,7 @@ const AppList = () => {
   const systemFeatures = useContextSelector(AppContext, v => v.systemFeatures)
 
   return (
-    <div className='relative flex flex-col overflow-y-auto bg-background-body shrink-0 h-0 grow'>
+    <div className='relative flex flex-col h-0 overflow-y-auto shrink-0 grow bg-background-body'>
       <Apps />
     </div >
   )

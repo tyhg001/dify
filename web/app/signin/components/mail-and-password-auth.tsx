@@ -123,7 +123,7 @@ export default function MailAndPasswordAuth({ isInvite, isEmailSetup, allowRegis
     </div>
 
     <div className='mb-3'>
-      <label htmlFor="password" className="my-2 flex items-center justify-between">
+      <label htmlFor="password" className="flex items-center justify-between my-2">
         <span className='system-md-semibold text-text-secondary'>{t('login.password')}</span>
       </label>
       <div className="relative mt-1">

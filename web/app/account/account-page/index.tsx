@@ -122,7 +122,7 @@ export default function AccountPage() {
         <div className='mr-3'>
           <AppIcon size='tiny' />
         </div>
-        <div className='mt-[3px] system-sm-medium text-text-secondary'>{item.name}</div>
+        <div className='system-sm-medium mt-[3px] text-text-secondary'>{item.name}</div>
       </div>
     )
   }
@@ -132,7 +132,7 @@ export default function AccountPage() {
       <div className='pt-2 pb-3'>
         <h4 className='title-2xl-semi-bold text-text-primary'>{t('common.account.myAccount')}</h4>
       </div>
-      <div className='mb-8 p-6 rounded-xl flex items-center bg-gradient-to-r from-background-gradient-bg-fill-chat-bg-2 to-background-gradient-bg-fill-chat-bg-1'>
+      <div className='flex items-center p-6 mb-8 rounded-xl bg-gradient-to-r from-background-gradient-bg-fill-chat-bg-2 to-background-gradient-bg-fill-chat-bg-1'>
         <AvatarWithEdit avatar={userProfile.avatar_url} name={userProfile.name} onSave={ mutateUserProfile } size={64} />
         <div className='ml-4'>
           <p className='system-xl-semibold text-text-primary'>{userProfile.name}</p>
@@ -141,26 +141,26 @@ export default function AccountPage() {
       </div>
       <div className='mb-8'>
         <div className={titleClassName}>{t('common.account.name')}</div>
-        <div className='flex items-center justify-between gap-2 w-full mt-2'>
-          <div className='flex-1 bg-components-input-bg-normal rounded-lg p-2 system-sm-regular text-components-input-text-filled '>
+        <div className='flex items-center justify-between w-full gap-2 mt-2'>
+          <div className='flex-1 p-2 rounded-lg system-sm-regular bg-components-input-bg-normal text-components-input-text-filled '>
             <span className='pl-1'>{userProfile.name}</span>
           </div>
-          <div className='bg-components-button-tertiary-bg rounded-lg py-2 px-3 cursor-pointer system-sm-medium text-components-button-tertiary-text' onClick={handleEditName}>
+          <div className='px-3 py-2 rounded-lg cursor-pointer system-sm-medium bg-components-button-tertiary-bg text-components-button-tertiary-text' onClick={handleEditName}>
             {t('common.operation.edit')}
           </div>
         </div>
       </div>
       <div className='mb-8'>
         <div className={titleClassName}>登陆账号</div>
-        <div className='flex items-center justify-between gap-2 w-full mt-2'>
-          <div className='flex-1 bg-components-input-bg-normal rounded-lg p-2 system-sm-regular text-components-input-text-filled '>
+        <div className='flex items-center justify-between w-full gap-2 mt-2'>
+          <div className='flex-1 p-2 rounded-lg bg-components-input-bg-normal system-sm-regular text-components-input-text-filled '>
             <span className='pl-1'>{userProfile.email}</span>
           </div>
         </div>
       </div>
       {
         systemFeatures.enable_email_password_login && (
-          <div className='mb-8 flex justify-between gap-2'>
+          <div className='flex justify-between gap-2 mb-8'>
             <div>
               <div className='mb-1 system-sm-semibold text-text-secondary'>{t('common.account.password')}</div>
               <div className='mb-2 body-xs-regular text-text-tertiary'>{t('common.account.passwordTip')}</div>

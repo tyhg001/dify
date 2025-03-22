@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useContext, useContextSelector } from 'use-context-selector'
 import { RiAccountCircleLine, RiArrowDownSLine, RiArrowRightUpLine, RiBookOpenLine, RiGithubLine, RiInformation2Line, RiLogoutBoxRLine, RiMap2Line, RiSettings3Line, RiStarLine } from '@remixicon/react'
 import Link from 'next/link'
-import { Menu, Transition } from '@headlessui/react'
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import Indicator from '../indicator'
 import AccountAbout from '../account-about'
 import GithubStar from '../github-star'
@@ -58,21 +58,21 @@ export default function AppSelector({ isMobile }: IAppSelector) {
         {
           ({ open }) => (
             <>
-              <Menu.Button
+              <MenuButton
                 className={`
                     inline-flex items-center
-                    rounded-[20px] py-1 pr-2.5 pl-1 text-sm
+                    rounded-[20px] py-1 pl-1 pr-2.5 text-sm
                   text-text-secondary hover:bg-state-base-hover
                     mobile:px-1
                     ${open && 'bg-state-base-hover'}
                   `}
               >
-                <Avatar avatar={userProfile.avatar_url} name={userProfile.name} className='sm:mr-2 mr-0' size={32} />
+                <Avatar avatar={userProfile.avatar_url} name={userProfile.name} className='mr-0 sm:mr-2' size={32} />
                 {!isMobile && <>
                   {userProfile.name}
                   <RiArrowDownSLine className="w-3 h-3 ml-1 text-text-tertiary" />
                 </>}
-              </Menu.Button>
+              </MenuButton>
               <Transition
                 as={Fragment}
                 enter="transition ease-out duration-100"
@@ -82,48 +82,48 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items
+                <MenuItems
                   className="
                     absolute right-0 mt-1.5 w-60 max-w-80
-                    divide-y divide-divider-subtle origin-top-right rounded-lg bg-components-panel-bg-blur
+                    origin-top-right divide-y divide-divider-subtle rounded-lg bg-components-panel-bg-blur
                     shadow-lg focus:outline-none
                   "
                 >
-                  <Menu.Item disabled>
-                    <div className='flex flex-nowrap items-center pl-3 pr-2 py-[13px]'>
+                  <MenuItem disabled>
+                    <div className='flex flex-nowrap items-center py-[13px] pl-3 pr-2'>
                       <div className='grow'>
-                        <div className='system-md-medium text-text-primary break-all'>{userProfile.name}</div>
+                        <div className='break-all system-md-medium text-text-primary'>{userProfile.name}</div>
                       </div>
                       <Avatar avatar={userProfile.avatar_url} name={userProfile.name} size={36} className='mr-3' />
                     </div>
-                  </Menu.Item>
+                  </MenuItem>
                   <div className="px-1 py-1">
-                    <Menu.Item>
-                      {({ active }) => <Link
+                    <MenuItem>
+                      <Link
                         className={classNames(itemClassName, 'group',
-                          active && 'bg-state-base-hover',
+                          'data-[active]:bg-state-base-hover',
                         )}
                         href='/account'
                         target='_self' rel='noopener noreferrer'>
                         <RiAccountCircleLine className='size-4 shrink-0 text-text-tertiary' />
-                        <div className='grow system-md-regular text-text-secondary px-1'>{t('common.account.account')}</div>
+                        <div className='px-1 system-md-regular grow text-text-secondary'>{t('common.account.account')}</div>
                         <RiArrowRightUpLine className='size-[14px] shrink-0 text-text-tertiary' />
                       </Link>}
                     </Menu.Item>
                   </div>
-                  <Menu.Item>
-                    {({ active }) => <div className='p-1' onClick={() => handleLogout()}>
+                  <MenuItem>
+                    <div className='p-1' onClick={() => handleLogout()}>
                       <div
                         className={classNames(itemClassName, 'group justify-between',
-                          active && 'bg-state-base-hover',
+                          'data-[active]:bg-state-base-hover',
                         )}
                       >
-                        <RiLogoutBoxRLine className='shrink-0 size-4 text-text-tertiary' />
-                        <div className='grow system-md-regular text-text-secondary px-1'>{t('common.userProfile.logout')}</div>
+                        <RiLogoutBoxRLine className='size-4 shrink-0 text-text-tertiary' />
+                        <div className='px-1 system-md-regular grow text-text-secondary'>{t('common.userProfile.logout')}</div>
                       </div>
-                    </div>}
-                  </Menu.Item>
-                </Menu.Items>
+                    </div>
+                  </MenuItem>
+                </MenuItems>
               </Transition>
             </>
           )
